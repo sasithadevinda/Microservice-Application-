@@ -40,12 +40,12 @@ build/
 *.class
 *.jar
 *.war
-*.ear 
-*~ 
-*.swp 
-*.tmp 
-/config/*.json 
-/credentials/*.txt 
+*.ear
+*~
+*.swp
+*.tmp
+/config/*.json
+/credentials/*.txt
 
 
 
