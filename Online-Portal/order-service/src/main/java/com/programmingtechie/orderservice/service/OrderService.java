@@ -31,11 +31,14 @@ public class OrderService {
 
 
         order.setOrderLineItems(orderLineItemsDTOList);
+
         List<String> skuCodes = order.getOrderLineItems().stream().map(OrderLineItems::getSkuCode).collect(Collectors.toList());
+        System.out.println("#######"+Arrays.toString(skuCodes.toArray()));
         InventoryResponse[] isAvailable = webClient.get().
-                uri("http://localhost:8082/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
+                uri("http://localhost:8085/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
                 .retrieve().bodyToMono(InventoryResponse[].class)
                 .block();
+        System.out.println(Arrays.stream(isAvailable).toArray()+"???????????");
         boolean allProductInStock = Arrays.stream(isAvailable).allMatch(InventoryResponse::getInStock);
 if(allProductInStock){
     orderRepository.save(order);
